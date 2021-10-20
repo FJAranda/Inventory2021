@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="splash_tvName_marginBottom">200dp</dimen>
     <dimen name="spalsh_tvName_textSize">48sp</dimen>
+    <dimen name="login_tvLogin_textSize">50sp</dimen>
 </resources>
