@@ -30,6 +30,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUser"
         style="@style/HintTextAppearance"
+        app:errorEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin">
@@ -44,6 +45,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPassword"
         style="@style/HintTextAppearance"
+        app:errorEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin">
