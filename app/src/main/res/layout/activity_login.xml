@@ -23,11 +23,13 @@
         android:textColor="@color/dark"
         android:gravity="center_horizontal"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         >
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUser"
+        style="@style/HintTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin">
@@ -41,6 +43,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPassword"
+        style="@style/HintTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin">
@@ -57,6 +60,7 @@
         android:layout_height="wrap_content">
         <CheckBox
             android:id="@+id/cbRemenber"
+            android:buttonTint="@color/light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cbRecuerdame"
@@ -64,6 +68,8 @@
         </CheckBox>
         <Button
             android:id="@+id/btnSignUp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="@android:color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btnSignUp"
@@ -74,6 +80,7 @@
 
     <Button
         android:id="@+id/btnSignIn"
+        android:backgroundTint="@color/light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -96,6 +103,7 @@
         android:layout_height="wrap_content">
         <ImageButton
             android:id="@+id/imgbtnGoogleSign"
+            android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_google"
@@ -104,6 +112,7 @@
         </ImageButton>
         <ImageButton
             android:id="@+id/imgbtnFacebookSign"
+            android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_facebook"

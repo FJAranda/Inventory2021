@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="HintTextAppearance">
+        <item name="android:background">@drawable/shape_text_input_layout</item>
+        <item name="hintTextColor">@color/light</item>
+        <item name="boxBackgroundMode">none</item>
+    </style>
+</resources>
