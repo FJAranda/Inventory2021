@@ -5,4 +5,6 @@
     <dimen name="splash_tvName_marginBottom">200dp</dimen>
     <dimen name="spalsh_tvName_textSize">48sp</dimen>
     <dimen name="login_tvLogin_textSize">50sp</dimen>
+    <dimen name="inventor_title_text_size">48sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

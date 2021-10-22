@@ -15,4 +15,18 @@
     <string name="tvOtherLogin">Iniciar sesión con otras plataformas</string>
     <string name="login_tiledt_userHint">Nombre de usuario</string>
     <string name="login_tiledt_passwordHint">Contraseña</string>
+    <string name="txtRegistro">Registro</string>
+    <string name="textEdtUser">Nombre de usuario</string>
+    <string name="textEdtPassword">Contraseña</string>
+    <string name="textEdtMail">Correo electrónico</string>
+    <string name="btnEnviar">Enviar</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

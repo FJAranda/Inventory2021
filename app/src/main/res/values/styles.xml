@@ -7,4 +7,8 @@
         <item name="hintTextColor">@color/light</item>
         <item name="boxBackgroundMode">none</item>
     </style>
+
+    <style name="TextInputLayoutSignUp" parent="HintTextAppearance">
+        <item name="android:background">@null</item>
+    </style>
 </resources>
