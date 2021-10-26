@@ -7,4 +7,5 @@
     <dimen name="login_tvLogin_textSize">50sp</dimen>
     <dimen name="inventor_title_text_size">48sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fdashboard_view_height">32dp</dimen>
 </resources>

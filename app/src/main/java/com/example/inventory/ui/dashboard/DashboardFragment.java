@@ -12,7 +12,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.inventory.R;
 import com.example.inventory.databinding.FragmentDashboardBinding;
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements View.OnClickListener{
 
     private FragmentDashboardBinding binding;
 
@@ -23,6 +23,12 @@ public class DashboardFragment extends Fragment {
     ) {
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding.imgBtnAbout.setOnClickListener(this);
+        binding.imgBtnDependency.setOnClickListener(this);
+        binding.imgBtnInventory.setOnClickListener(this);
+        binding.imgBtnProduct.setOnClickListener(this);
+        binding.imgBtnSector.setOnClickListener(this);
+        binding.imgBtnSettings.setOnClickListener(this);
         return binding.getRoot();
 
     }
@@ -37,4 +43,23 @@ public class DashboardFragment extends Fragment {
         binding = null;
     }
 
+    //Método que maneja los eventos onClick de la interfaz
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.imgBtnAbout:
+                showAboutFragment();
+            case R.id.imgBtnInventory:
+                showAddInventoryFragment();
+        }
+    }
+
+    private void showAddInventoryFragment() {
+        NavHostFragment.findNavController(this).navigate(R.id.action_DashboardFragment_to_addInventoryFragment);
+    }
+
+    //Inicializa y muestra el fragment About
+    private void showAboutFragment() {
+        NavHostFragment.findNavController(this).navigate(R.id.action_DashboardFragment_to_aboutFragment);
+    }
 }
