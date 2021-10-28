@@ -41,4 +41,6 @@
     <string name="txtFechaFin">Fecha Fin</string>
     <string name="txtModificarInventario">Modificar Inventario</string>
     <string name="tctOk">Ok</string>
+    <string name="action_search">Search</string>
+    <string name="order_dependency">Ordenar dependencias</string>
 </resources>

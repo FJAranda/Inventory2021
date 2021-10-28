@@ -37,8 +37,7 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TextView tvNombre = holder.itemView.findViewById(R.id.tvNombreDependencia);
-        tvNombre.setText(list.get(position).getNombre());
+        holder.tvNombre.setText(list.get(position).getNombre());
     }
 
     @Override
@@ -47,8 +46,10 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvNombre;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            tvNombre = itemView.findViewById(R.id.tvNombreDependencia);
         }
     }
 }
