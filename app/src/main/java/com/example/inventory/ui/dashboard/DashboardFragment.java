@@ -51,7 +51,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
                 showAboutFragment();
             case R.id.imgBtnInventory:
                 showAddInventoryFragment();
+            case R.id.imgBtnDependency:
+                showDependencyListFragment();
         }
+    }
+
+    private void showDependencyListFragment() {
+        NavHostFragment.findNavController(this).navigate(R.id.action_DashboardFragment_to_dependencyListFragment);
     }
 
     private void showAddInventoryFragment() {

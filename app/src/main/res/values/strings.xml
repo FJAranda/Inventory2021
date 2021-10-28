@@ -36,4 +36,9 @@
     <string name="strAbout">About us</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txtFechaCreacion">Fecha Creaccion</string>
+    <string name="txtFechaActivacion">Fecha de Activacion</string>
+    <string name="txtFechaFin">Fecha Fin</string>
+    <string name="txtModificarInventario">Modificar Inventario</string>
+    <string name="tctOk">Ok</string>
 </resources>

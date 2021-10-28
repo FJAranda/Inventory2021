@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_DashboardFragment_to_addInventoryFragment"
             app:destination="@id/addInventoryFragment" />
+        <action
+            android:id="@+id/action_DashboardFragment_to_dependencyListFragment"
+            app:destination="@id/dependencyListFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -27,4 +30,9 @@
         android:name="com.example.inventory.ui.inventory.AddInventoryFragment"
         android:label="fragment_add_inventory"
         tools:layout="@layout/fragment_add_inventory" />
+    <fragment
+        android:id="@+id/dependencyListFragment"
+        android:name="com.example.inventory.ui.dependency.DependencyListFragment"
+        android:label="fragment_dependency_list"
+        tools:layout="@layout/fragment_dependency_list" />
 </navigation>
