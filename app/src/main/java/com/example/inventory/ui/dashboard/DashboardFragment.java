@@ -49,10 +49,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()){
             case R.id.imgBtnAbout:
                 showAboutFragment();
+                break;
             case R.id.imgBtnInventory:
                 showAddInventoryFragment();
+                break;
             case R.id.imgBtnDependency:
                 showDependencyListFragment();
+                break;
         }
     }
 
