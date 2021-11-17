@@ -43,4 +43,6 @@
     <string name="tctOk">Ok</string>
     <string name="action_search">Search</string>
     <string name="order_dependency">Ordenar dependencias</string>
+    <string name="userEmptyError">El usuario no puede ser vacio</string>
+    <string name="passwordEmptyError">La contraseña no puede estar vacia</string>
 </resources>
