@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.example.inventory.data.model.User;
 
-public class LoginPresenter implements LoginContract.Presenter, LoginInteractorImpl.LoginInteractor {
+public class LoginPresenter implements LoginContract.Presenter, LoginContract.LoginInteractor {
     private LoginContract.View view;
     private LoginInteractorImpl interactor;
 
@@ -23,7 +23,7 @@ public class LoginPresenter implements LoginContract.Presenter, LoginInteractorI
 
     //region Metodos del contrato con el interactor
     @Override
-    public void onUserEmptyError() {
+    public void onEmailEmptyError() {
         view.hideProgressBar();
         view.setUserEmptyError();
     }
@@ -36,18 +36,20 @@ public class LoginPresenter implements LoginContract.Presenter, LoginInteractorI
 
     @Override
     public void onPasswordError() {
-
-    }
-
-    @Override
-    public void onAuthenticationError() {
-
-    }
-
-    @Override
-    public void onSuccess() {
         view.hideProgressBar();
-        view.onSuccess();
+        view.setPasswordError();
     }
+
+    @Override
+    public void onSuccess(String message) {
+        view.hideProgressBar();
+        view.onSuccess("");
+    }
+
+    @Override
+    public void onFailure(String message) {
+
+    }
+
     //endregion
 }

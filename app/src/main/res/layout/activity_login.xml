@@ -28,7 +28,7 @@
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilUser"
+        android:id="@+id/tilEmail"
         style="@style/HintTextAppearance"
         app:errorEnabled="true"
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiledtUser"
+            android:id="@+id/tiledtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/login_tiledt_userHint" />

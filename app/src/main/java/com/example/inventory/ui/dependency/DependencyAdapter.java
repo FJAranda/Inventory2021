@@ -1,6 +1,5 @@
 package com.example.inventory.ui.dependency;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventory.R;
-import com.example.inventory.model.Dependency;
+import com.example.inventory.data.model.Dependency;
 
 import java.util.ArrayList;
 

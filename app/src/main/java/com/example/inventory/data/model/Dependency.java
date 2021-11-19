@@ -1,4 +1,4 @@
-package com.example.inventory.model;
+package com.example.inventory.data.model;
 
 public class Dependency {
     private String nombre;
