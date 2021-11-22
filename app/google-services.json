@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "854879552983",
+    "project_id": "javinventory",
+    "storage_bucket": "javinventory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854879552983:android:2333c4d1df27a97ad97792",
+        "android_client_info": {
+          "package_name": "com.example.inventory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854879552983-5j83t0ma34pdn8mkbbqdk5n3qf1o9mdk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.inventory",
+            "certificate_hash": "f5d664fa12fb76ab468323dab240b299ab4db401"
+          }
+        },
+        {
+          "client_id": "854879552983-f79m2c2d8ogp73b3c98cb921fapm9s5c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVBmNugFMCqQY2uomckGxh2vau_WMBzNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854879552983-f79m2c2d8ogp73b3c98cb921fapm9s5c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

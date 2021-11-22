@@ -34,8 +34,7 @@ public class LoginInteractorImpl implements LoginContract.OnLoginListener{
                     return;
                 }
                 presenter.onSuccess("");
-                //TODO: QUITAR COMENTARIO INFERIOR CUANDO ESTE IMPLEMENTADO EL REPOSITORIO
-                //repository.login(user);
+                    repository.login(user);
             }
         }, WAIT_TIME);
     }
