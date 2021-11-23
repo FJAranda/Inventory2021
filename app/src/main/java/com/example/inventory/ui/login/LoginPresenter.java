@@ -41,6 +41,12 @@ public class LoginPresenter implements LoginContract.Presenter, LoginContract.Lo
     }
 
     @Override
+    public void onEmailError() {
+        view.hideProgressBar();
+        view.setUserError();
+    }
+
+    @Override
     public void onSuccess(String message) {
         view.hideProgressBar();
         view.onSuccess("");
@@ -48,7 +54,8 @@ public class LoginPresenter implements LoginContract.Presenter, LoginContract.Lo
 
     @Override
     public void onFailure(String message) {
-
+        view.hideProgressBar();
+        view.onFailure(message);
     }
 
     //endregion

@@ -8,6 +8,7 @@ public interface LoginContract {
         void setUserEmptyError();
         void setPasswordEmptyError();
         void setPasswordError();
+        void setUserError();
 
         void showProgressBar();
         void hideProgressBar();
@@ -31,5 +32,6 @@ public interface LoginContract {
         void onEmailEmptyError();
         void onPasswordEmptyError();
         void onPasswordError();
+        void onEmailError();
     }
 }

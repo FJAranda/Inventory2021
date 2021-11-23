@@ -33,19 +33,19 @@ public class LoginInteractorImpl implements LoginContract.OnLoginListener{
                     presenter.onPasswordError();
                     return;
                 }
-                presenter.onSuccess("");
-                    repository.login(user);
+                repository.login(user);
             }
         }, WAIT_TIME);
     }
 
+    //Respuestas de LoginRepository
     @Override
     public void onSuccess(String message) {
-
+        presenter.onSuccess(message);
     }
 
     @Override
     public void onFailure(String message) {
-
+        presenter.onFailure(message);
     }
 }
