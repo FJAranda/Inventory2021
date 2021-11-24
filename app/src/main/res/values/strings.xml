@@ -47,4 +47,6 @@
     <string name="passwordEmptyError">La contraseña no puede estar vacia</string>
     <string name="passwordError">La contraseña no cumple los requisitos</string>
     <string name="emailError">El correo electronico no es válido.</string>
+    <string name="passwordMatchError">Las Contraseñas no coincidenn</string>
+    <string name="userEmptyError">El usuario no puede ser vacio.</string>
 </resources>

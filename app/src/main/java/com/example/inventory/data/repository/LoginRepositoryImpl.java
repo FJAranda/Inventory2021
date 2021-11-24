@@ -47,8 +47,6 @@ public class LoginRepositoryImpl implements LoginContract.LoginRepository{
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             listener.onFailure("Error Autenticacion:"+task.getException());
-
-
                         }
                     }
                 });

@@ -159,7 +159,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private void validateEmail(String str) {
         if (TextUtils.isEmpty(str)){
             binding.tilEmail.setError(getString(R.string.emailEmptyError));
-        }else if(Patterns.EMAIL_ADDRESS.matcher(str).matches()) {
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(str).matches()) {
             binding.tilEmail.setError(getString(R.string.passwordError));
         }else{
             binding.tilEmail.setError(null);
