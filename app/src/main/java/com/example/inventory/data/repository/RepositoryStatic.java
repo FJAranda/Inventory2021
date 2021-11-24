@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 public class RepositoryStatic implements LoginContract.LoginRepository, SignUpContract.SignUpRepository {
     private static RepositoryStatic repository;
-    private LoginContract.OnLoginListener listener;
+    private LoginContract.OnLoginListener loginListener;
+    private SignUpContract.OnSignUpListener signUpListener;
     private ArrayList<User> users;
 
     private RepositoryStatic(){
@@ -24,10 +25,16 @@ public class RepositoryStatic implements LoginContract.LoginRepository, SignUpCo
     }
 
     private static RepositoryStatic getInstance(LoginContract.OnLoginListener listener){
-
         if (repository == null)
             repository = new RepositoryStatic();
-        repository.listener = listener;
+        repository.loginListener = listener;
+        return repository;
+    }
+
+    private static RepositoryStatic getInstance(SignUpContract.OnSignUpListener listener){
+        if (repository == null)
+            repository = new RepositoryStatic();
+        repository.signUpListener = listener;
         return repository;
     }
 
@@ -35,22 +42,22 @@ public class RepositoryStatic implements LoginContract.LoginRepository, SignUpCo
     public void login(User user) {
         for (User item:users){
             if (item.getEmail().equals(user.getEmail())&&item.getPassword().equals(user.getPassword())){
-                listener.onSuccess("Usuario Correcto");
+                loginListener.onSuccess("Usuario Correcto");
                 return;
             }
         }
-        listener.onFailure("Error en la autenticación");
+        loginListener.onFailure("Error en la autenticación");
     }
 
     @Override
     public void signUp(User user) {
         for (User item:users){
             if (user.getEmail().equals(item.getEmail())){
-                listener.onFailure("El correo ya existe.");
+                signUpListener.onFailure("El correo ya existe.");
                 return;
             }else{
                 users.add(user);
-                listener.onSuccess("Usuario creado con exito.");
+                signUpListener.onSuccess("Usuario creado con exito.");
             }
         }
     }
