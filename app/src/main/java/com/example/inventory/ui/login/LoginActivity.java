@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     protected void onDestroy() {
         super.onDestroy();
         if (presenter != null){
-            presenter = null;
+            presenter.onDestroy();
         }
     }
 
@@ -95,12 +95,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     }
 
     @Override
-    public void showProgressBar() {
+    public void showProgress() {
         binding.pbLogin.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideProgressBar() {
+    public void hideProgress() {
         binding.pbLogin.setVisibility(View.GONE);
     }
 

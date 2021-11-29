@@ -3,11 +3,12 @@ package com.example.inventory.ui.login;
 import android.os.Handler;
 import android.text.TextUtils;
 
+import com.example.inventory.base.OnRepositoryCallBack;
 import com.example.inventory.data.model.User;
 import com.example.inventory.data.repository.LoginRepositoryImpl;
 import com.example.inventory.utils.CommonUtils;
 
-public class LoginInteractorImpl implements LoginContract.OnLoginListener{
+public class LoginInteractorImpl implements OnRepositoryCallBack {
     private static final long WAIT_TIME = 2000;
     private LoginContract.LoginInteractor presenter;
     private LoginContract.LoginRepository repository;

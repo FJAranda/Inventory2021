@@ -1,7 +1,6 @@
 package com.example.inventory.ui.signup;
 
 import com.example.inventory.data.model.User;
-import com.example.inventory.ui.login.LoginContract;
 
 public class SignUpPresenter implements SignUpContract.SignUpPresenter, SignUpContract.SignUpInteractor {
     private SignUpContract.View view;
@@ -16,49 +15,55 @@ public class SignUpPresenter implements SignUpContract.SignUpPresenter, SignUpCo
     @Override
     public void validateCredentials(User user, String password) {
         interactor.validateCredentials(user, password);
-        view.showProgressBar();
+        view.showProgress();
     }
 
     //Comunicacion con el interactor
     @Override
     public void onSuccess(String message) {
-        view.hideProgressBar();
+        view.hideProgress();
         view.onSuccess(message);
     }
 
     @Override
     public void onFailure(String message) {
-        view.hideProgressBar();
+        view.hideProgress();
         view.onFailure(message);
     }
 
     @Override
     public void onEmailEmptyError() {
-        view.hideProgressBar();
+        view.hideProgress();
         view.setEmailEmptyError();
     }
 
     @Override
     public void onEmailError() {
-        view.hideProgressBar();
+        view.hideProgress();
         view.setEmailError();
     }
 
     @Override
     public void onPasswordEmptyError() {
-        view.hideProgressBar();
+        view.hideProgress();
         view.setPasswordEmptyError();
     }
 
     @Override
     public void onConfirmPasswordError() {
-        view.hideProgressBar();
+        view.hideProgress();
         view.setConfirmPasswordError();
     }
 
     @Override
     public void onPasswordError() {
-        view.hideProgressBar();
+        view.hideProgress();
         view.setPasswordError();
+    }
+
+    @Override
+    public void onDestroy() {
+        this.view = null;
+        this.interactor = null;
     }
 }

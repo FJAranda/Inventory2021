@@ -1,6 +1,10 @@
 package com.example.inventory.ui.signup;
 
+import com.example.inventory.base.IBasePresenter;
+import com.example.inventory.base.IProgressView;
+import com.example.inventory.base.OnRepositoryCallBack;
 import com.example.inventory.data.model.User;
+import com.example.inventory.ui.login.LoginContract;
 
 public interface SignUpContract {
 
@@ -8,32 +12,20 @@ public interface SignUpContract {
         void signUp(User user);
     }
 
-    interface OnSignUpListener{
-        void onSuccess(String message);
-        void onFailure(String message);
-    }
-
-    interface SignUpInteractor extends OnSignUpListener{
-        void onEmailEmptyError();
-        void onEmailError();
-        void onPasswordEmptyError();
+    interface SignUpInteractor extends LoginContract.LoginInteractor {
         void onConfirmPasswordError();
-        void onPasswordError();
     }
 
-    interface SignUpPresenter{
+    interface SignUpPresenter extends IBasePresenter {
         void validateCredentials(User user, String password);
     }
 
-    interface View extends OnSignUpListener{
+    interface View extends OnRepositoryCallBack, IProgressView {
         void setEmailEmptyError();
         void setEmailError();
         void setPasswordEmptyError();
         void setConfirmPasswordError();
         void setPasswordError();
-
-        void showProgressBar();
-        void hideProgressBar();
     }
 
 }

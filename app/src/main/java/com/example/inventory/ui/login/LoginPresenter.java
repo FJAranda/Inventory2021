@@ -1,7 +1,5 @@
 package com.example.inventory.ui.login;
 
-import android.view.View;
-
 import com.example.inventory.data.model.User;
 
 public class LoginPresenter implements LoginContract.Presenter, LoginContract.LoginInteractor {
@@ -17,45 +15,51 @@ public class LoginPresenter implements LoginContract.Presenter, LoginContract.Lo
     @Override
     public void validateCredentials(User user) {
         interactor.validateCredentials(user);
-        view.showProgressBar();
+        view.showProgress();
     }
     //endregion
 
     //region Metodos del contrato con el interactor
     @Override
     public void onEmailEmptyError() {
-        view.hideProgressBar();
+        view.hideProgress();
         view.setUserEmptyError();
     }
 
     @Override
     public void onPasswordEmptyError() {
-        view.hideProgressBar();
+        view.hideProgress();
         view.setPasswordEmptyError();
     }
 
     @Override
     public void onPasswordError() {
-        view.hideProgressBar();
+        view.hideProgress();
         view.setPasswordError();
     }
 
     @Override
     public void onEmailError() {
-        view.hideProgressBar();
+        view.hideProgress();
         view.setUserError();
     }
 
     @Override
     public void onSuccess(String message) {
-        view.hideProgressBar();
+        view.hideProgress();
         view.onSuccess("");
     }
 
     @Override
     public void onFailure(String message) {
-        view.hideProgressBar();
+        view.hideProgress();
         view.onFailure(message);
+    }
+
+    @Override
+    public void onDestroy() {
+        this.view=null;
+        this.interactor = null;
     }
 
     //endregion

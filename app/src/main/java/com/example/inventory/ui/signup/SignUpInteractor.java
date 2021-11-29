@@ -3,11 +3,12 @@ package com.example.inventory.ui.signup;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import com.example.inventory.base.OnRepositoryCallBack;
 import com.example.inventory.data.model.User;
 import com.example.inventory.data.repository.SignUpRepository;
 import com.example.inventory.utils.CommonUtils;
 
-public class SignUpInteractor implements SignUpContract.OnSignUpListener {
+public class SignUpInteractor implements OnRepositoryCallBack {
     private SignUpContract.SignUpRepository repository;
     private SignUpContract.SignUpInteractor presenter;
 

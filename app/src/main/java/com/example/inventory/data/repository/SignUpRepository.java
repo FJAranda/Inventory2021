@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.inventory.base.OnRepositoryCallBack;
 import com.example.inventory.data.model.User;
 import com.example.inventory.ui.signup.SignUpContract;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -13,13 +14,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpRepository implements SignUpContract.SignUpRepository {
     private static SignUpRepository instance;
-    private static SignUpContract.OnSignUpListener listener;
+    private static OnRepositoryCallBack listener;
     private static final String TAG = SignUpRepository.class.getName();
 
     private SignUpRepository(){
     }
 
-    public static SignUpRepository newInstance(SignUpContract.OnSignUpListener listener){
+    public static SignUpRepository newInstance(OnRepositoryCallBack listener){
         if (instance == null){
             instance = new SignUpRepository();
         }

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.inventory.base.OnRepositoryCallBack;
 import com.example.inventory.data.model.User;
 import com.example.inventory.ui.login.LoginContract;
 import com.google.firebase.auth.AuthResult;
@@ -16,13 +17,13 @@ import com.example.inventory.ui.login.LoginInteractorImpl;
 //Simulamos que la instancia de loginrepository es unica (Patron singleton)
 public class LoginRepositoryImpl implements LoginContract.LoginRepository{
     private static LoginRepositoryImpl instance;
-    private LoginContract.OnLoginListener listener;
+    private OnRepositoryCallBack listener;
     private static final String TAG= LoginRepositoryImpl.class.getName();
 
     private LoginRepositoryImpl() {
     }
 
-    public static LoginRepositoryImpl newInstance(LoginContract.OnLoginListener loginListener){
+    public static LoginRepositoryImpl newInstance(OnRepositoryCallBack loginListener){
         if (instance == null){
             instance = new LoginRepositoryImpl();
         }

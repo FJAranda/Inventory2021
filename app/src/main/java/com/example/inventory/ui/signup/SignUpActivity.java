@@ -58,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
     protected void onDestroy() {
         super.onDestroy();
         if (presenter != null) {
-            presenter = null;
+            presenter.onDestroy();
         }
     }
 
@@ -94,12 +94,12 @@ public class SignUpActivity extends AppCompatActivity implements SignUpContract.
     }
 
     @Override
-    public void showProgressBar() {
+    public void showProgress() {
         binding.pbSignUp.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideProgressBar() {
+    public void hideProgress() {
         binding.pbSignUp.setVisibility(View.GONE);
 
     }
