@@ -11,17 +11,18 @@ import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.inventory.MainActivity;
 import com.example.inventory.R;
+import com.example.inventory.base.Event;
 import com.example.inventory.data.model.User;
 import com.example.inventory.databinding.ActivityLoginBinding;
 import com.example.inventory.ui.signup.SignUpActivity;
 import com.example.inventory.utils.CommonUtils;
 
-import java.util.regex.Pattern;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
@@ -58,6 +59,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             //startActivity(intent);
             presenter.validateCredentials(new User(binding.tilEmail.getEditText().getText().toString(), binding.tiledtPassword.getText().toString()));
         });
+
+        EventBus.getDefault().register(this);
     }
 
     private void startMainActivity() {
@@ -71,6 +74,19 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         if (presenter != null){
             presenter.onDestroy();
         }
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter = new LoginPresenter(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter = null;
     }
 
     //region Metodos del contrato con el presenter
@@ -166,6 +182,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         }
 
     }
-
     //endregion
+
+    @Subscribe
+    public void onEvent(Event event) {
+        hideProgress();
+        Toast.makeText(this, event.getMessage(),Toast.LENGTH_SHORT).show();
+    }
 }

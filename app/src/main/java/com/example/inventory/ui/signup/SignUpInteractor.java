@@ -5,7 +5,7 @@ import android.util.Patterns;
 
 import com.example.inventory.base.OnRepositoryCallBack;
 import com.example.inventory.data.model.User;
-import com.example.inventory.data.repository.SignUpRepository;
+import com.example.inventory.data.repository.LoginRepositoryImpl;
 import com.example.inventory.utils.CommonUtils;
 
 public class SignUpInteractor implements OnRepositoryCallBack {
@@ -14,7 +14,7 @@ public class SignUpInteractor implements OnRepositoryCallBack {
 
     public SignUpInteractor (SignUpContract.SignUpInteractor presenter) {
         this.presenter = presenter;
-        this.repository = SignUpRepository.newInstance(this);
+        this.repository = LoginRepositoryImpl.newInstance(this);
     }
 
     //Reglas de negocio
