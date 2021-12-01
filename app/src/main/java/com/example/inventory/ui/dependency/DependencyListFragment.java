@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.example.inventory.R;
 import com.example.inventory.databinding.FragmentDependencyListBinding;
 
-public class DependencyListFragment extends Fragment {
+public class DependencyListFragment extends Fragment implements DependencyListContract.view{
     FragmentDependencyListBinding binding;
     private DependencyAdapter adapter;
 

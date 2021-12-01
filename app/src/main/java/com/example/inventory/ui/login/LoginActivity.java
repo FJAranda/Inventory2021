@@ -80,13 +80,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     protected void onResume() {
         super.onResume();
-        presenter = new LoginPresenter(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        presenter = null;
+        if (presenter == null) {
+            presenter = new LoginPresenter(this);
+        }
     }
 
     //region Metodos del contrato con el presenter
