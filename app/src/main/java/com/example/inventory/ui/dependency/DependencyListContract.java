@@ -1,17 +1,20 @@
 package com.example.inventory.ui.dependency;
 
 import com.example.inventory.base.IBasePresenter;
+import com.example.inventory.base.IProgressView;
 import com.example.inventory.base.OnRepositoryCallBack;
 import com.example.inventory.base.OnRepositoryDeleteCallback;
 import com.example.inventory.base.OnRepositoryListCallback;
 import com.example.inventory.base.OnRepositoryUndoCallback;
 import com.example.inventory.data.model.Dependency;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface DependencyListContract {
-    interface view{
-
+    interface view extends OnRepositoryListCallback, IProgressView {
+        void showData(List<Dependency> list);
+        void showNoData();
     }
 
     interface Presenter extends IBasePresenter{

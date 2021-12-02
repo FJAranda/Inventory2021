@@ -7,6 +7,35 @@
     android:layout_height="match_parent"
     tools:context=".ui.dependency.DependencyListFragment">
 
+    <LinearLayout
+        android:id="@+id/llNoDataDependencyList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:id="@+id/ivDependencyListNoData"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7">
+        </ImageView>
+        <TextView
+            android:id="@+id/tvDependencyListNoData"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            ></TextView>
+    </LinearLayout>
+
+ <!-- ProgressDialog oculto que se mostrará en las consultas -->
+    <include
+        android:id="@+id/includePBDependencyList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/layout_progressbar"></include>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDependency"
         android:layout_width="match_parent"

@@ -10,4 +10,5 @@
     <dimen name="fdashboard_view_height">32dp</dimen>
     <dimen name="frgAddInventory_glStart_begin">20dp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="dependency_item_size">64dp</dimen>
 </resources>

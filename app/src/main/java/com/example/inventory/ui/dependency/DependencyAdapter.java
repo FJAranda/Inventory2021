@@ -1,29 +1,41 @@
 package com.example.inventory.ui.dependency;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.example.inventory.R;
 import com.example.inventory.data.model.Dependency;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.ViewHolder> {
 
     private ArrayList<Dependency> list;
+    private OnManageDependencyListener listener;
 
-    public DependencyAdapter() {
-        this.list = new ArrayList<Dependency>();
-        list.add(new Dependency("Aula 1", "A1", null, null));
-        list.add(new Dependency("Aula 2", "A2", null, null));
-        list.add(new Dependency("Aula 3", "A3", null, null));
-        list.add(new Dependency("Aula 4", "A4", null, null));
-        list.add(new Dependency("Aula 5", "A5", null, null));
+    public void update(List<Dependency> list) {
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public interface OnManageDependencyListener{
+        void onEditDependency(Dependency dependency);
+        void onDeleteDependency(Dependency dependency);
+    }
+
+    public DependencyAdapter(ArrayList<Dependency> list, OnManageDependencyListener listener ) {
+        this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,6 +48,9 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        TextDrawable drawable = TextDrawable.builder()
+                .buildRect(list.get(position).getNombre().substring(0,1), Color.RED);
+        holder.ivIcon.setImageDrawable(drawable);
         holder.tvNombre.setText(list.get(position).getNombre());
     }
 
@@ -46,9 +61,11 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNombre;
+        ImageView ivIcon;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombre = itemView.findViewById(R.id.tvNombreDependencia);
+            ivIcon = itemView.findViewById(R.id.ivDependencyItem);
         }
     }
 }

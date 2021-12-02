@@ -14,9 +14,15 @@
         android:theme="@style/Theme.Inventory">
         <activity
             android:name=".MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Inventory" />
+            android:theme="@style/Theme.Inventory">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.signup.SignUpActivity"
             android:exported="false" />
@@ -24,11 +30,6 @@
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             />
         </activity>
         <activity

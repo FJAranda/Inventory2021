@@ -50,4 +50,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'org.greenrobot:eventbus:3.2.0'
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }
