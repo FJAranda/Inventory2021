@@ -34,5 +34,13 @@
         android:id="@+id/dependencyListFragment"
         android:name="com.example.inventory.ui.dependency.DependencyListFragment"
         android:label="fragment_dependency_list"
-        tools:layout="@layout/fragment_dependency_list" />
+        tools:layout="@layout/fragment_dependency_list" >
+        <action
+            android:id="@+id/action_dependencyListFragment_to_baseDialogFragment"
+            app:destination="@id/baseDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/baseDialogFragment"
+        android:name="com.example.inventory.base.BaseDialogFragment"
+        android:label="BaseDialogFragment" />
 </navigation>

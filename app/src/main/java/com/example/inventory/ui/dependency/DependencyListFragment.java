@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,8 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.inventory.R;
+import com.example.inventory.base.BaseDialogFragment;
 import com.example.inventory.data.model.Dependency;
 import com.example.inventory.databinding.FragmentDependencyListBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,12 +104,27 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     //region Metodos del adapter
     @Override
     public void onEditDependency(Dependency dependency) {
-
+        Snackbar.make(getView(), "Se ha realizado una pulsación CORTA", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void onDeleteDependency(Dependency dependency) {
-
+        //Snackbar.make(getView(), "Se ha realizado una pulsación LARGA", Snackbar.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putString(BaseDialogFragment.TITLE, "Elimminar Elemento");
+        bundle.putString(BaseDialogFragment.MESSAGE, "¿Desea eliminar el elemento: " + dependency.getNombre() + "?");
+        //Conectar el dialogFragment en el grefico de navegacion para poder navegar
+        getActivity().getSupportFragmentManager().setFragmentResultListener(BaseDialogFragment.KEY, this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                //Si la respuesta es true, se realiza lo que programemos aqui
+                if (bundle.getBoolean(BaseDialogFragment.KEY_BUNDLE)){
+                    presenter.delete(dependency);
+                }
+            }
+        });
+        NavHostFragment.findNavController(this).navigate(R.id.action_dependencyListFragment_to_baseDialogFragment, bundle);
+        //
     }
     //endregion
 
