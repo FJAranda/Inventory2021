@@ -12,6 +12,7 @@ import com.vansuita.materialabout.builder.AboutBuilder;
 import com.vansuita.materialabout.views.AboutView;
 
 public class AboutFragment extends Fragment {
+    public static final String TAG = "aboutFragment";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

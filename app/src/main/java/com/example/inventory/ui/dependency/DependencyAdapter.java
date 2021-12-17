@@ -14,8 +14,10 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.inventory.R;
 import com.example.inventory.data.model.Dependency;
+import com.example.inventory.data.model.DependencyComparator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.ViewHolder> {
@@ -23,12 +25,40 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
     private ArrayList<Dependency> list;
     private OnManageDependencyListener listener;
 
+//region Metodos que debe realizar el adapter
     public void update(List<Dependency> list) {
         this.list.clear();
         this.list.addAll(list);
         notifyDataSetChanged();
     }
 
+    public void order(){
+        Collections.sort(list);
+        notifyDataSetChanged();
+    }
+
+    public void inverseOrder(){
+        Collections.reverse(list);
+        notifyDataSetChanged();
+    }
+
+    public void orderByDescripcion(){
+        Collections.sort(list, new DependencyComparator());
+        notifyDataSetChanged();
+    }
+
+    public void delete(Dependency deletedDependency){
+        this.list.remove(deletedDependency);
+        notifyDataSetChanged();
+    }
+
+    public void undo(Dependency dependency){
+        list.add(dependency);
+        notifyDataSetChanged();
+    }
+    //endregion
+
+    //Respuestas de los eventos click de los elementos
     public interface OnManageDependencyListener{
         void onEditDependency(Dependency dependency);
         void onDeleteDependency(Dependency dependency);

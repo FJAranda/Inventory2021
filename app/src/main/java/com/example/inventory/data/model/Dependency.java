@@ -1,10 +1,17 @@
 package com.example.inventory.data.model;
 
-public class Dependency {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Dependency implements Comparable, Serializable {
+    public static final String TAG = "dependency";
+
     private String nombre;
     private String nombreCorto;
     private String descripcion;
     private String imagen;
+
+    public Dependency(){}
 
     public Dependency(String nombre, String nombreCorto, String descripcion, String imagen) {
         this.nombre = nombre;
@@ -43,5 +50,19 @@ public class Dependency {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return ((Dependency)o).getNombre().equals(getNombre());
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (((Dependency)o).getNombre().equals(getNombre())){
+            return ((Dependency)o).getDescripcion().compareTo(getDescripcion());
+        }else{
+            return ((Dependency)o).getNombre().compareTo(getNombre());
+        }
     }
 }

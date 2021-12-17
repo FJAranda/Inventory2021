@@ -1,6 +1,7 @@
 package com.example.inventory.data.model;
 
 public class User {
+    public static final String TAG = "user";
     private String email;
     private String password;
 

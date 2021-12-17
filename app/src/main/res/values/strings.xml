@@ -49,4 +49,12 @@
     <string name="emailError">El correo electronico no es válido.</string>
     <string name="passwordMatchError">Las Contraseñas no coincidenn</string>
     <string name="userEmptyError">El usuario no puede ser vacio.</string>
+    <string name="strNombre">Nombre</string>
+    <string name="strNombreCorto">Nombre corto</string>
+    <string name="strDescripcion">Descripcion</string>
+    <string name="strImagen">Imagen</string>
+    <string name="strEditarDependencia">Editar Dependencia</string>
+    <string name="strAddDependencia">Añadir Dependencia</string>
+    <string name="strOrdenarPorDescripcion">Ordenar segun la descripcion</string>
+    <string name="strUndo">Deshacer</string>
 </resources>

@@ -15,6 +15,8 @@ public interface DependencyListContract {
     interface view extends OnRepositoryListCallback, IProgressView {
         void showData(List<Dependency> list);
         void showNoData();
+        void showDataOrder();
+        void showDataInverseOrder();
     }
 
     interface Presenter extends IBasePresenter{
@@ -24,6 +26,8 @@ public interface DependencyListContract {
         void delete(Dependency dependency);
         //Snackbar undo
         void undo(Dependency dependency);
+        //Ordenar lista
+        void order();
     }
 
     /** Casos de uso:
@@ -35,13 +39,13 @@ public interface DependencyListContract {
 
     }
 
-    interface Repository{
+    interface Repository extends DependencyManageContract.Repository{
         //Carga datos
-        void getList();
+        void getList(OnRepositoryListCallback callback);
         //Pulsacion larga
-        void delete(Dependency dependency);
+        void delete(Dependency dependency, OnRepositoryListCallback callback);
         //Snackbar undo
-        void undo(Dependency dependency);
+        void undo(Dependency dependency, OnRepositoryListCallback callback);
     }
 
     //En caso de no querer unificar los casos de uso podemos usar una interfaz que extiende de los callback que necesito

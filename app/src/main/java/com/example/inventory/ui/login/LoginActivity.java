@@ -1,10 +1,12 @@
 package com.example.inventory.ui.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -118,6 +120,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void onSuccess(String message) {
+        SharedPreferences.Editor sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this).edit();
+        sharedPreferences.putString(User.TAG, binding.tiledtEmail.getText().toString());
+        sharedPreferences.apply();
         startMainActivity();
     }
 

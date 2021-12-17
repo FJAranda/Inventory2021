@@ -9,4 +9,7 @@
         android:icon="@android:drawable/ic_menu_sort_alphabetically"
         android:orderInCategory="1"
         />
+    <item
+        android:id="@+id/action_order_descripcion"
+        android:title="@string/strOrdenarPorDescripcion" />
 </menu>

@@ -36,10 +36,23 @@
         android:label="fragment_dependency_list"
         tools:layout="@layout/fragment_dependency_list" >
         <action
+            android:id="@+id/action_dependencyListFragment_to_dependencyManageFragment"
+            app:destination="@id/dependencyManageFragment" />
+        <action
             android:id="@+id/action_dependencyListFragment_to_baseDialogFragment"
             app:destination="@id/baseDialogFragment" />
     </fragment>
     <fragment
+        android:id="@+id/dependencyManageFragment"
+        android:name="com.example.inventory.ui.dependency.DependencyManageFragment"
+        android:label="fragment_dependency_manage"
+        tools:layout="@layout/fragment_dependency_manage" >
+        <argument
+            android:name="dependency"
+            app:argType="com.example.inventory.data.model.Dependency"
+            app:nullable="true" />
+    </fragment>
+    <dialog
         android:id="@+id/baseDialogFragment"
         android:name="com.example.inventory.base.BaseDialogFragment"
         android:label="BaseDialogFragment" />

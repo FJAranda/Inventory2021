@@ -31,6 +31,8 @@
         <entry key="app/src/main/res/layout/fragment_add_inventory.xml" value="0.286231884057971" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.286231884057971" />
         <entry key="app/src/main/res/layout/fragment_dependency_list.xml" value="0.286231884057971" />
+        <entry key="app/src/main/res/layout/fragment_dependency_manage.xml" value="0.2536231884057971" />
+        <entry key="app/src/main/res/menu/menu_dependency_list.xml" value="0.3390625" />
       </map>
     </option>
   </component>

@@ -9,6 +9,7 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
 
     private DependencyListContract.view view;
     private DependencyListInteractor interactor;
+    private boolean order = false;
 
     public DependencyListPresenter(DependencyListContract.view view) {
         this.view = view;
@@ -30,12 +31,24 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
 
     @Override
     public void delete(Dependency dependency) {
-
+        view.showProgress();
+        interactor.delete(dependency);
     }
 
     @Override
     public void undo(Dependency dependency) {
+        interactor.undo(dependency);
+    }
 
+    @Override
+    public void order() {
+        if (order){
+            order = false;
+            view.showDataInverseOrder();
+        }else{
+            order=true;
+            view.showDataOrder();
+        }
     }
 
     @Override
@@ -55,11 +68,12 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
 
     @Override
     public void onDeleteSuccess(String message) {
-
+        view.onDeleteSuccess(message);
+        view.hideProgress();
     }
 
     @Override
     public void onUndoSuccess(String message) {
-
+        view.onUndoSuccess(message);
     }
 }

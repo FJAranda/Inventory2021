@@ -10,19 +10,19 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.inventory.R;
 import com.example.inventory.base.BaseDialogFragment;
 import com.example.inventory.data.model.Dependency;
 import com.example.inventory.databinding.FragmentDependencyListBinding;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     FragmentDependencyListBinding binding;
     private DependencyAdapter adapter;
     private DependencyListContract.Presenter presenter;
-
+    private Dependency deletedDependency;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,10 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_order_dependency:
-                Toast.makeText(getActivity(), "Opcion ordenar dependencias", Toast.LENGTH_SHORT).show();
+                presenter.order();
+                return true;
+            case R.id.action_order_descripcion:
+                adapter.orderByDescripcion();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -65,6 +68,7 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentDependencyListBinding.inflate(inflater);
+        getActivity().setTitle(R.string.app_name);
         return binding.getRoot();
     }
 
@@ -72,6 +76,15 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initRvDependency();
+        initFab();
+    }
+
+    private void initFab() {
+        binding.floatingActionButton.setOnClickListener(v -> {
+            DependencyListFragmentDirections.ActionDependencyListFragmentToDependencyManageFragment action =
+                    DependencyListFragmentDirections.actionDependencyListFragmentToDependencyManageFragment(null);
+            NavHostFragment.findNavController(this).navigate(action);
+        });
     }
 
     @Override
@@ -104,27 +117,30 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     //region Metodos del adapter
     @Override
     public void onEditDependency(Dependency dependency) {
-        Snackbar.make(getView(), "Se ha realizado una pulsación CORTA", Snackbar.LENGTH_SHORT).show();
+        DependencyListFragmentDirections.ActionDependencyListFragmentToDependencyManageFragment action =
+                DependencyListFragmentDirections.actionDependencyListFragmentToDependencyManageFragment(dependency);
+        NavHostFragment.findNavController(this).navigate(action);
     }
 
     @Override
     public void onDeleteDependency(Dependency dependency) {
-        //Snackbar.make(getView(), "Se ha realizado una pulsación LARGA", Snackbar.LENGTH_SHORT).show();
+        Log.d("VIEW", "ONDELETEDEPENDENCY");
         Bundle bundle = new Bundle();
         bundle.putString(BaseDialogFragment.TITLE, "Elimminar Elemento");
         bundle.putString(BaseDialogFragment.MESSAGE, "¿Desea eliminar el elemento: " + dependency.getNombre() + "?");
         //Conectar el dialogFragment en el grefico de navegacion para poder navegar
-        getActivity().getSupportFragmentManager().setFragmentResultListener(BaseDialogFragment.KEY, this, new FragmentResultListener() {
+        getActivity().getSupportFragmentManager().setFragmentResultListener(BaseDialogFragment.REQUEST, this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                Log.d("VIEW", "ONFRAGMENTRESULT");
                 //Si la respuesta es true, se realiza lo que programemos aqui
-                if (bundle.getBoolean(BaseDialogFragment.KEY_BUNDLE)){
+                if (result.getBoolean(BaseDialogFragment.KEY_BUNDLE)){
+                    deletedDependency = dependency;
                     presenter.delete(dependency);
                 }
             }
         });
         NavHostFragment.findNavController(this).navigate(R.id.action_dependencyListFragment_to_baseDialogFragment, bundle);
-        //
     }
     //endregion
 
@@ -141,12 +157,22 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
 
     @Override
     public void onDeleteSuccess(String message) {
-
+        adapter.delete(deletedDependency);
+        Snackbar.make(getView(), message, BaseTransientBottomBar.LENGTH_SHORT)
+                .setAction(getString(R.string.strUndo), v ->{
+                    presenter.undo(deletedDependency);
+                }).show();
+        if (adapter.getItemCount() == 0){
+            showNoData();
+        }
     }
 
     @Override
     public void onUndoSuccess(String message) {
-
+        adapter.undo(deletedDependency);
+        if (binding.llNoDataDependencyList.getVisibility() == View.VISIBLE){
+            binding.llNoDataDependencyList.setVisibility(View.GONE);
+        }
     }
     //endregion
 
@@ -166,12 +192,25 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     //region Metodos del presenter
     @Override
     public void showData(List<Dependency> list) {
+        if (binding.llNoDataDependencyList.getVisibility() == View.VISIBLE){
+            binding.llNoDataDependencyList.setVisibility(View.GONE);
+        }
         adapter.update(list);
     }
 
     @Override
     public void showNoData() {
+        binding.llNoDataDependencyList.setVisibility(View.VISIBLE);
+    }
 
+    @Override
+    public void showDataOrder() {
+        adapter.order();
+    }
+
+    @Override
+    public void showDataInverseOrder() {
+        adapter.inverseOrder();
     }
     //endregion
 }
