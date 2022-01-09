@@ -1,0 +1,47 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Categoria que muestra otro fragment de preferencias-->
+    <Preference
+        android:fragment="com.example.inventory.ui.preferences.AccountFragment"
+        app:key="@string/key_account"
+        app:icon="@drawable/ic_key"
+        app:title="@string/title_account"
+        app:summary="@string/summary_account"></Preference>
+    <PreferenceCategory app:title="@string/notifications_header">
+        <SwitchPreference android:defaultValue="true"
+            app:key="@string/notification_key"
+            app:summary="@string/summary_notification"
+            app:title="@string/title_notification"></SwitchPreference>
+        <ListPreference
+            app:key="@string/ringtone_key"
+            app:title="@string/title_ringtone"
+            app:summary="@string/summary_ringtone"
+            android:entries="@array/ringtone"
+            android:entryValues="@array/ringtone_values">
+        </ListPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/dependency_header">
+
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="@string/dependency_title" />
+
+        <SwitchPreferenceCompat
+            app:dependency="sync"
+            app:key="attachment"
+            app:summaryOff="@string/attachment_summary_off"
+            app:summaryOn="@string/attachment_summary_on"
+            app:title="@string/attachment_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/help_header">
+        <Preference app:title="@string/help_point">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://faq.whatsapp.com"></intent>
+        </Preference>
+        <Preference app:title="@string/privacy_conditions"></Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

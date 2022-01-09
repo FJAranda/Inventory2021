@@ -120,9 +120,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void onSuccess(String message) {
+        if (binding.cbRemenber.isChecked()){
         SharedPreferences.Editor sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this).edit();
         sharedPreferences.putString(User.TAG, binding.tiledtEmail.getText().toString());
         sharedPreferences.apply();
+        }
         startMainActivity();
     }
 

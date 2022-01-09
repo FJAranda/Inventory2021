@@ -57,4 +57,32 @@
     <string name="strAddDependencia">Añadir Dependencia</string>
     <string name="strOrdenarPorDescripcion">Ordenar segun la descripcion</string>
     <string name="strUndo">Deshacer</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Descargar imagenes automaticamente</string>
+    <string name="attachment_summary_on">Descargar imagenes de las dependencias automaticamente</string>
+    <string name="attachment_summary_off">Descargar imagenes de las dependencias de forma manual</string>
+    <string name="dependency_header">Dependency</string>
+    <string name="dependency_title">Sincronizar dependencias periodicamente</string>
+    <string name="title_account">Cuenta</string>
+    <string name="summary_account">Privavidad, seguridad...</string>
+    <string name="help_header">Ayuda</string>
+    <string name="key_account">key_account</string>
+    <string name="help_point">Centro de ayuda</string>
+    <string name="privacy_conditions">Condiciones y privacidad</string>
+    <string name="notifications_header">Notificaciones</string>
+    <string name="summary_notification">Activa las notificaciones de todos los objetos</string>
+    <string name="notification_key">notification_key</string>
+    <string name="title_notification">Activar notificaciones</string>
+    <string name="title_ringtone">Tono de las notificaciones</string>
+    <string name="summary_ringtone">Tono con el que sonaran las notificaciones de la app</string>
+    <string name="ringtone_key">ringtone_key</string>
 </resources>

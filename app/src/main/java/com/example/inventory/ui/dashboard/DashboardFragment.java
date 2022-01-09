@@ -56,7 +56,14 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
             case R.id.imgBtnDependency:
                 showDependencyListFragment();
                 break;
+            case R.id.imgBtnSettings:
+                showSettings();
+                break;
         }
+    }
+
+    private void showSettings() {
+        NavHostFragment.findNavController(this).navigate(R.id.action_DashboardFragment_to_settingsFragment);
     }
 
     private void showDependencyListFragment() {
