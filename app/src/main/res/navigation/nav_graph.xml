@@ -3,26 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/DashboardFragment">
+    app:startDestination="@id/dependencyListFragment">
 
-    <fragment
-        android:id="@+id/DashboardFragment"
-        android:name="com.example.inventory.ui.dashboard.DashboardFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_dashboard">
-        <action
-            android:id="@+id/action_DashboardFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
-        <action
-            android:id="@+id/action_DashboardFragment_to_addInventoryFragment"
-            app:destination="@id/addInventoryFragment" />
-        <action
-            android:id="@+id/action_DashboardFragment_to_dependencyListFragment"
-            app:destination="@id/dependencyListFragment" />
-        <action
-            android:id="@+id/action_DashboardFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.inventory.ui.about.AboutFragment"

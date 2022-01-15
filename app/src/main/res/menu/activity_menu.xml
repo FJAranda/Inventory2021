@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_inventory"
+            android:title="Inventory"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_dependencyList"
+            android:title="Dependencys"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_sections"
+            android:title="Sections"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_products"
+            android:title="Products"
+            app:showAsAction="never" />
+    </group>
+
+    <item android:title="Options">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/action_aboutus"
+                    android:title="@string/strAbout"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/action_settings"
+                    android:title="@string/strSettings"
+                    app:showAsAction="never" />
+            </group>
+        </menu>
+    </item>
+
+</menu>
