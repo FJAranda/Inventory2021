@@ -2,6 +2,7 @@ package com.example.inventory.ui.dependency;
 
 import com.example.inventory.data.model.Dependency;
 import com.example.inventory.data.repository.DependencyRepository;
+import com.example.inventory.data.repository.DependencyRepositoryRoom;
 
 public class DependencyManageInteractor implements  DependencyManageContract.OnManageCallback{
     private DependencyManageContract.ListenerInteractor listener;
@@ -33,11 +34,11 @@ public class DependencyManageInteractor implements  DependencyManageContract.OnM
 
     //Metodos que el interactor envia hacer al repositorio
     public void add(Dependency dependency){
-        DependencyRepository.getInstance().add(dependency, this);
+        DependencyRepositoryRoom.getInstance().add(dependency, this);
     }
 
     public void edit(String nombreCorto, Dependency dependency){
-        DependencyRepository.getInstance().edit(nombreCorto, dependency, this);
+        DependencyRepositoryRoom.getInstance().edit(nombreCorto, dependency, this);
     }
 
 }

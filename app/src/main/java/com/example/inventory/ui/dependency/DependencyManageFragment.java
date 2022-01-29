@@ -66,6 +66,9 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
 
     private Dependency getDependency() {
         Dependency dependency = new Dependency();
+        if (DependencyManageFragmentArgs.fromBundle(getArguments()).getDependency() != null) {
+            dependency.setId(DependencyManageFragmentArgs.fromBundle(getArguments()).getDependency().getId());
+        }
         dependency.setNombre(binding.tiledtNombre.getText().toString());
         dependency.setNombreCorto(binding.tiledtNombreCorto.getText().toString());
         dependency.setDescripcion(binding.tiledtDescripcion.getText().toString());

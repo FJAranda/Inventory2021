@@ -4,6 +4,8 @@ import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 
+import com.example.inventory.data.database.MyDatabase;
+
 public class InventoryApplication extends Application {
     public static final String IDCHANNEL = "123456";
 
@@ -11,6 +13,7 @@ public class InventoryApplication extends Application {
     public void onCreate() {
         super.onCreate();
         createNotificationChannel();
+        MyDatabase.create(this);
     }
 
     private void createNotificationChannel() {

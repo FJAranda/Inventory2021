@@ -3,6 +3,7 @@ package com.example.inventory.ui.dependency;
 import com.example.inventory.base.OnRepositoryListCallback;
 import com.example.inventory.data.model.Dependency;
 import com.example.inventory.data.repository.DependencyRepository;
+import com.example.inventory.data.repository.DependencyRepositoryRoom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,15 +38,15 @@ public class DependencyListInteractor implements OnRepositoryListCallback {
 
     //Metodos que el interactor envia al repositorio
     public void load() {
-        DependencyRepository.getInstance().getList(this);
+        DependencyRepositoryRoom.getInstance().getList(this);
     }
 
     public void delete(Dependency dependency){
-        DependencyRepository.getInstance().delete(dependency, this);
+        DependencyRepositoryRoom.getInstance().delete(dependency, this);
     }
 
     public void undo(Dependency dependency){
-        DependencyRepository.getInstance().undo(dependency, this);
+        DependencyRepositoryRoom.getInstance().undo(dependency, this);
     }
 
 }
