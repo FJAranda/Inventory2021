@@ -12,7 +12,7 @@
             android:title="Dependencys"
             app:showAsAction="never" />
         <item
-            android:id="@+id/action_sections"
+            android:id="@+id/action_sectionList"
             android:title="Sections"
             app:showAsAction="never" />
         <item

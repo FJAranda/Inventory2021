@@ -1,5 +1,7 @@
 package com.example.inventory.data.repository;
 
+import android.util.Log;
+
 import com.example.inventory.base.OnRepositoryListCallback;
 import com.example.inventory.data.dao.DependencyDAO;
 import com.example.inventory.data.database.MyDatabase;
@@ -38,6 +40,29 @@ public class DependencyRepositoryRoom implements DependencyListContract.Reposito
         return repository;
     }
 
+    public List<Dependency> getList(){
+        try {
+            list = (ArrayList<Dependency>) MyDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.selectAll()).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public Dependency getDependencyByNombreCorto(String nombreCorto){
+        Dependency dependency = null;
+        try {
+            dependency = MyDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.findByNombreCorto(nombreCorto)).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return dependency;
+    }
+
     @Override
     public void getList(OnRepositoryListCallback callback) {
         try {
@@ -64,6 +89,7 @@ public class DependencyRepositoryRoom implements DependencyListContract.Reposito
 
     @Override
     public void edit(String nombreCorto, Dependency dependency, DependencyManageContract.OnManageCallback callback) {
+        Log.d("DEPENDENCY REPOSITORY", String.valueOf(dependency.getId()));
         MyDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.update(dependency));
         callback.onEditSuccess("Dependencia " + nombreCorto + " editada.");
     }
