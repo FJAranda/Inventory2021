@@ -1,11 +1,17 @@
 package com.example.inventory.data.model;
 
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
 import java.io.Serializable;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.squareup.picasso.Picasso;
 
 @Entity
 public class Dependency implements Comparable, Serializable {
@@ -45,6 +51,11 @@ public class Dependency implements Comparable, Serializable {
         this.nombreCorto = nombreCorto;
         this.descripcion = descripcion;
         this.imagen = imagen;
+    }
+
+    @BindingAdapter({"bind:imageUrl", "bind:error"})
+    public static void loadImage(ImageView imageView, String url, Drawable error){
+        Picasso.get().load(url).error(error).into(imageView);
     }
 
     public String getNombre() {

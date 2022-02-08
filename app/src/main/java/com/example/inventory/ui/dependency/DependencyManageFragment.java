@@ -72,7 +72,7 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
         dependency.setNombre(binding.tiledtNombre.getText().toString());
         dependency.setNombreCorto(binding.tiledtNombreCorto.getText().toString());
         dependency.setDescripcion(binding.tiledtDescripcion.getText().toString());
-        dependency.setImagen(dependency.getImagen());
+        dependency.setImagen(binding.tiledtDescripcion.getText().toString());
         return dependency;
     }
 
