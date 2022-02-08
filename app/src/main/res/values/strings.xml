@@ -85,4 +85,16 @@
     <string name="title_ringtone">Tono de las notificaciones</string>
     <string name="summary_ringtone">Tono con el que sonaran las notificaciones de la app</string>
     <string name="ringtone_key">ringtone_key</string>
+    <string name="strErrorLoading">Error al cargar la lista</string>
+    <string name="strErrorDeleting">Error eliminando.</string>
+    <string name="strErrorUndoing">Error deshaciendo la accion.</string>
+    <string name="strEditarSection">Editar Sección</string>
+    <string name="strAddSection">Nueva sección</string>
+    <string name="strAddFailure">Error al añadir</string>
+    <string name="strEditarSectionSuccess">Seccion editada con exito</string>
+    <string name="strEditFailure">Error al editar</string>
+    <string name="strAddSectionSuccess">Seccion añadida!</string>
+    <string name="strNullValue">El campo no puede ser nulo</string>
+    <string name="strBadLength">El campo debe tener minimo 3 caracteres</string>
+    <string name="strDependecyNull">Cada seccion debe estar en una dependencia</string>
 </resources>

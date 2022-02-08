@@ -1,21 +1,48 @@
 package com.example.inventory.data.model;
 
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
-
-import java.io.Serializable;
-
 import androidx.annotation.NonNull;
-import androidx.databinding.BindingAdapter;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.squareup.picasso.Picasso;
+import java.io.Serializable;
 
 @Entity
-public class Dependency implements Comparable, Serializable {
-    public static final String TAG = "dependency";
+public class Section implements Comparable, Serializable {
+    public static final String TAG = "section";
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    @NonNull
+    private String nombre;
+    @NonNull
+    private String nombreCorto;
+    @NonNull
+    private String dependencia;
+    @NonNull
+    private String descripcion;
+    private String imagen;
+
+    @Ignore
+    public Section(String nombre, String nombreCorto, String dependencia, String descripcion, String imagen) {
+        this.nombre = nombre;
+        this.nombreCorto = nombreCorto;
+        this.dependencia = dependencia;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+    }
+
+    public Section(int id, String nombre, String nombreCorto, String dependencia, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.nombreCorto = nombreCorto;
+        this.dependencia = dependencia;
+        this.descripcion = descripcion;
+    }
+
+    @Ignore
+    public Section() {
+    }
 
     public int getId() {
         return id;
@@ -23,39 +50,6 @@ public class Dependency implements Comparable, Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-
-    @NonNull
-    private String nombre;
-    @NonNull
-    private String nombreCorto;
-    private String descripcion;
-    private String imagen;
-
-    @Ignore
-    public Dependency(){}
-    @Ignore
-    public Dependency(String nombre, String nombreCorto, String descripcion, String imagen) {
-        this.nombre = nombre;
-        this.nombreCorto = nombreCorto;
-        this.descripcion = descripcion;
-        this.imagen = imagen;
-    }
-
-    public Dependency(int id, String nombre, String nombreCorto, String descripcion, String imagen) {
-        this.id = id;
-        this.nombre = nombre;
-        this.nombreCorto = nombreCorto;
-        this.descripcion = descripcion;
-        this.imagen = imagen;
-    }
-
-    @BindingAdapter({"bind:imageUrl", "bind:error"})
-    public static void loadImage(ImageView imageView, String url, Drawable error){
-        Picasso.get().load(url).error(error).into(imageView);
     }
 
     public String getNombre() {
@@ -72,6 +66,14 @@ public class Dependency implements Comparable, Serializable {
 
     public void setNombreCorto(String nombreCorto) {
         this.nombreCorto = nombreCorto;
+    }
+
+    public String getDependencia() {
+        return dependencia;
+    }
+
+    public void setDependencia(String dependencia) {
+        this.dependencia = dependencia;
     }
 
     public String getDescripcion() {
@@ -92,20 +94,15 @@ public class Dependency implements Comparable, Serializable {
 
     @Override
     public boolean equals(Object o) {
-        return ((Dependency)o).getNombre().equals(getNombre());
+        return ((Section)o).getNombreCorto().equals(getNombreCorto());
     }
 
     @Override
     public int compareTo(Object o) {
-        if (((Dependency)o).getNombre().equals(getNombre())){
-            return ((Dependency)o).getDescripcion().compareTo(getDescripcion());
+        if (((Section)o).getNombreCorto().equals(getNombreCorto())){
+            return ((Section)o).getNombre().compareTo(getNombre());
         }else{
-            return ((Dependency)o).getNombre().compareTo(getNombre());
+            return ((Section)o).getDescripcion().compareTo(getDescripcion());
         }
-    }
-
-    @Override
-    public String toString() {
-        return nombreCorto;
     }
 }

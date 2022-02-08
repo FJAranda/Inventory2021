@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements PreferenceFragmen
         Set<Integer> topLevelDestination = new HashSet<>();
         topLevelDestination.add(R.id.action_dependencyList);
         topLevelDestination.add(R.id.action_inventory);
+        topLevelDestination.add(R.id.action_sectionList);
         topLevelDestination.add(R.id.action_about);
         topLevelDestination.add(R.id.action_settings);
         topLevelDestination.add(R.id.action_products);
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements PreferenceFragmen
                 case R.id.action_dependencyList:
                     showDependencyList();
                     break;
-                case R.id.action_sections:
+                case R.id.action_sectionList:
                     showSections();
                     break;
                 case R.id.action_products:
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements PreferenceFragmen
     }
 
     private void showSections() {
-        navController.navigate(R.id.action_dependencyList);
+        navController.navigate(R.id.action_sectionList);
     }
 
     private void showDependencyList() {

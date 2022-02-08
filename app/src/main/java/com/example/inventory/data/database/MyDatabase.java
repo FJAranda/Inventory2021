@@ -7,17 +7,20 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.inventory.data.dao.DependencyDAO;
+import com.example.inventory.data.dao.SectionDAO;
 import com.example.inventory.data.model.Dependency;
+import com.example.inventory.data.model.Section;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 //Defino la clase de la base de datos
-@Database(entities = {Dependency.class}, version = 1)
+@Database(entities = {Dependency.class, Section.class}, version = 2)
 public abstract class MyDatabase extends RoomDatabase {
 
     //Creo los metodos de obtencion del dao
     public abstract DependencyDAO dependencyDAO();
+    public abstract SectionDAO sectionDAO();
     private static volatile MyDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =
@@ -43,7 +46,7 @@ public abstract class MyDatabase extends RoomDatabase {
             synchronized (MyDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            MyDatabase.class, "example")
+                            MyDatabase.class, "inventory")
                             .build();
                 }
             }

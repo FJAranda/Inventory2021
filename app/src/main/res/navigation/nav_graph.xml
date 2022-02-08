@@ -58,4 +58,25 @@
         android:name="com.example.inventory.ui.product.ProductFragment"
         android:label="Products"
         tools:layout="@layout/fragment_product" />
+    <fragment
+        android:id="@+id/action_sectionList"
+        android:name="com.example.inventory.ui.section.SectionListFragment"
+        android:label="SectionListFragment" >
+        <action
+            android:id="@+id/action_sectionListFragment_to_sectionManageFragment"
+            app:destination="@id/sectionManageFragment" />
+        <action
+            android:id="@+id/action_sectionList_to_baseDialogFragment"
+            app:destination="@id/baseDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sectionManageFragment"
+        android:name="com.example.inventory.ui.section.SectionManageFragment"
+        android:label="fragment_section_manage"
+        tools:layout="@layout/fragment_section_manage" >
+        <argument
+            android:name="section"
+            app:argType="com.example.inventory.data.model.Section"
+            app:nullable="true" />
+    </fragment>
 </navigation>
