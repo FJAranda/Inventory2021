@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 
 import com.example.inventory.base.Event;
 import com.example.inventory.base.OnRepositoryCallBack;
+import com.example.inventory.data.dao.UserDao;
+import com.example.inventory.data.database.MyDatabase;
 import com.example.inventory.data.model.User;
 import com.example.inventory.ui.login.LoginContract;
 import com.example.inventory.ui.signup.SignUpContract;
@@ -17,14 +19,21 @@ import com.example.inventory.ui.login.LoginInteractorImpl;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 
 //Simulamos que la instancia de loginrepository es unica (Patron singleton)
 public class LoginRepositoryImpl implements LoginContract.LoginRepository, SignUpContract.SignUpRepository {
     private static LoginRepositoryImpl instance;
     private OnRepositoryCallBack listener;
     private static final String TAG= LoginRepositoryImpl.class.getName();
+    private UserDao dao;
+    private ArrayList<User> users;
 
     private LoginRepositoryImpl() {
+        this.users = new ArrayList<>();
+        dao = MyDatabase.getDatabase().userDao();
     }
 
     public static LoginRepositoryImpl newInstance(OnRepositoryCallBack loginListener){
@@ -35,7 +44,51 @@ public class LoginRepositoryImpl implements LoginContract.LoginRepository, SignU
         return instance;
     }
 
+    public static LoginRepositoryImpl newInstance(){
+        if (instance == null){
+            instance = new LoginRepositoryImpl();
+        }
+        return instance;
+    }
+
+    private void primerInsert(){
+        MyDatabase.databaseWriteExecutor.submit(() -> dao.insert(new User("javierarandacaro@gmail.com", "Javi-123")));
+    }
+
     @Override
+    public void login(User user) {
+        //primerInsert();
+        Log.d("LoginRepositoryImplement", "ROOM");
+        User mUser = null;
+        try {
+            mUser = (User)MyDatabase.databaseWriteExecutor.submit(() -> dao.login(user.getEmail(), user.getPassword())).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (mUser != null){
+            listener.onSuccess("Login correcto");
+        }else{
+            listener.onFailure("Login incorrecto");
+        }
+    }
+
+    public User loginRoom(String email, String password) {
+        //primerInsert();
+        Log.d(email, password);
+        User mUser = null;
+        try {
+            mUser = (User)MyDatabase.databaseWriteExecutor.submit(() -> dao.login(email, password)).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return mUser;
+    }
+
+    /*@Override
     public void login(User user) {
         FirebaseAuth mAuth =FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
@@ -59,7 +112,7 @@ public class LoginRepositoryImpl implements LoginContract.LoginRepository, SignU
                         }
                     }
                 });
-    }
+    }*/
 
     @Override
     public void signUp(User user) {
@@ -80,4 +133,6 @@ public class LoginRepositoryImpl implements LoginContract.LoginRepository, SignU
                     }
                 });
     }
+
+
 }

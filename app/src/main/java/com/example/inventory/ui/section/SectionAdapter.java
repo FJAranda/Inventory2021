@@ -8,16 +8,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inventory.R;
 import com.example.inventory.data.model.Section;
+import com.example.inventory.databinding.SectionItemBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHolder> {
 
+    private SectionItemBinding mBinding;
     public ArrayList<Section> list;
     private SectionListListener listener;
 
@@ -50,16 +53,17 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.section_item, parent, false);
-        return new ViewHolder(view);
+        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.section_item, parent, false);
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.section_item, parent, false);
+        return new ViewHolder(mBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SectionAdapter.ViewHolder holder, int position) {
         //TODO: SET IMAGE
         //holder.ivSection.setImageDrawable(list.get(position).getImagen());
-        holder.tvSection.setText(list.get(position).getNombreCorto());
-        holder.tvDependency.setText(list.get(position).getDependencia());
+        //holder.tvSection.setText(list.get(position).getNombreCorto());
+        //holder.tvDependency.setText(list.get(position).getDependencia());
         holder.bind(list.get(position), listener);
     }
 
@@ -73,16 +77,17 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHold
         TextView tvSection;
         TextView tvDependency;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            this.ivSection = itemView.findViewById(R.id.ivSectionItem);
-            this.tvSection = itemView.findViewById(R.id.tvSectionNombreCorto);
-            this.tvDependency = itemView.findViewById(R.id.tvSectionDependency);
+        public ViewHolder(@NonNull SectionItemBinding binding) {
+            super(binding.getRoot());
+            mBinding = binding;
+            //this.ivSection = itemView.findViewById(R.id.ivSectionItem);
+            //this.tvSection = itemView.findViewById(R.id.tvSectionNombreCorto);
+            //this.tvDependency = itemView.findViewById(R.id.tvSectionDependency);
         }
 
         public void bind(Section section, SectionListListener listener){
+            mBinding.setSection(section);
             itemView.setOnClickListener(v ->{
-                Log.d("SECTION ADAPTER", String.valueOf(section.getId()));
                 listener.onEditSection(section);
             });
             itemView.setOnLongClickListener( v->{

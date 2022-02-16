@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +34,7 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     private DependencyAdapter adapter;
     private DependencyListContract.Presenter presenter;
     private Dependency deletedDependency;
+    private DependencyVM viewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,12 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(DependencyVM.class);
+        viewModel.getDependencies().observe(getViewLifecycleOwner(), dependencies -> {
+            adapter.update(dependencies);
+            binding.swipeContainer.setRefreshing(false);
+        });
+        binding.setViewmodel(viewModel);
         initRvDependency();
         initFab();
     }
@@ -91,7 +99,7 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     public void onStart() {
         super.onStart();
         //solicito los datos
-        presenter.load();
+        //presenter.load();
     }
 
     @Override

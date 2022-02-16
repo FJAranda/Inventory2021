@@ -40,15 +40,16 @@ public class DependencyRepositoryRoom implements DependencyListContract.Reposito
         return repository;
     }
 
-    public List<Dependency> getList(){
+    //VIEWMODEL
+    public ArrayList<Dependency> getList(){
         try {
-            list = (ArrayList<Dependency>) MyDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.selectAll()).get();
+            return (ArrayList<Dependency>) MyDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.selectAll()).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return list;
+        return null;
     }
 
     public Dependency getDependencyByNombreCorto(String nombreCorto){

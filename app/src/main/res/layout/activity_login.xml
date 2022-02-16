@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.inventory.ui.login.LoginViewModel" />
+    </data>
+<LinearLayout
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,11 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin">
-
+        <!-- Se podría usar el objeto viewmodel para el text -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiledtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@={viewmodel.email}"
             android:hint="@string/login_tiledt_userHint" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,6 +61,7 @@
             android:id="@+id/tiledtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@={viewmodel.password}"
             android:hint="@string/login_tiledt_passwordHint" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,6 +96,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
+        android:onClick="@{() -> viewmodel.validateCredentials()}"
         android:text="@string/action_sign_in" />
 
     <ProgressBar
@@ -141,3 +150,4 @@
         android:visibility="gone" />
 
 </LinearLayout>
+</layout>

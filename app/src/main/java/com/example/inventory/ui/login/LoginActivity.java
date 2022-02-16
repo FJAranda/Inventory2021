@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -22,14 +23,16 @@ import com.example.inventory.data.model.User;
 import com.example.inventory.databinding.ActivityLoginBinding;
 import com.example.inventory.ui.signup.SignUpActivity;
 import com.example.inventory.utils.CommonUtils;
+import com.example.inventory.utils.StateView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.View {
+public class LoginActivity extends AppCompatActivity {
 
     private LoginContract.Presenter presenter;
     private ActivityLoginBinding binding;
+    private LoginViewModel viewModel;
 
     private Button btnRegistrar;
     private Button btnLogin;
@@ -40,8 +43,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        presenter = new LoginPresenter(this);
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        binding.setViewmodel(viewModel);
 
         binding.tiledtPassword.addTextChangedListener(new LoginTextWatcher(binding.tiledtPassword));
         binding.tiledtEmail.addTextChangedListener(new LoginTextWatcher(binding.tiledtEmail));
@@ -56,13 +59,42 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             }
         });
 
+        /* Se hace mediante databinding
         btnLogin.setOnClickListener( v -> {
-            //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            //startActivity(intent);
-            presenter.validateCredentials(new User(binding.tilEmail.getEditText().getText().toString(), binding.tiledtPassword.getText().toString()));
+            viewModel.validateCredentials();
+        });*/
+
+        //Se vincula el ciclo de vida con el observer, dentro del livedata
+        viewModel.getError().observe(this, error ->{
+            switch (error){
+                case R.string.emailEmptyError:
+                    setUserEmptyError();
+                    break;
+                case R.string.passwordEmptyError:
+                    setPasswordEmptyError();
+                    break;
+                case R.string.passwordError:
+                    setPasswordError();
+                    break;
+            }
         });
 
-        EventBus.getDefault().register(this);
+        viewModel.getState().observe(this, object ->{
+            StateView.State state = (StateView.State) object;
+            switch (state){
+                case LOADING:
+                    showProgress();
+                    break;
+                case COMPLETED:
+                    hideProgress();
+                    startMainActivity();
+                    break;
+                case ERROR:
+                    hideProgress();
+                    break;
+            }
+        });
+
     }
 
     private void startMainActivity() {
@@ -70,55 +102,32 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         startActivity(intent);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (presenter != null){
-            presenter.onDestroy();
-        }
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (presenter == null) {
-            presenter = new LoginPresenter(this);
-        }
-    }
 
     //region Metodos del contrato con el presenter
-    @Override
     public void setUserEmptyError() {
         binding.tilEmail.setError(getString(R.string.emailEmptyError));
     }
 
-    @Override
     public void setPasswordEmptyError() {
         binding.tilPassword.setError(getString(R.string.passwordEmptyError));
     }
 
-    @Override
     public void setPasswordError() {
         binding.tilPassword.setError(getString(R.string.passwordError));
     }
 
-    @Override
     public void setUserError() {
         binding.tilEmail.setError(getString(R.string.emailError));
     }
 
-    @Override
     public void showProgress() {
         binding.pbLogin.setVisibility(View.VISIBLE);
     }
 
-    @Override
     public void hideProgress() {
         binding.pbLogin.setVisibility(View.GONE);
     }
 
-    @Override
     public void onSuccess(String message) {
         if (binding.cbRemenber.isChecked()){
         SharedPreferences.Editor sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this).edit();
@@ -128,7 +137,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         startMainActivity();
     }
 
-    @Override
     public void onFailure(String message) {
         Toast.makeText(this,message, Toast.LENGTH_LONG).show();
     }
@@ -186,10 +194,4 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     }
     //endregion
-
-    @Subscribe
-    public void onEvent(Event event) {
-        hideProgress();
-        Toast.makeText(this, event.getMessage(),Toast.LENGTH_SHORT).show();
-    }
 }

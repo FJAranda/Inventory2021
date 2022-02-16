@@ -1,53 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clDependencyList"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.dependency.DependencyListFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:id="@+id/llNoDataDependencyList"
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.inventory.ui.dependency.DependencyVM" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/clDependencyList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-        <ImageView
-            android:id="@+id/ivDependencyListNoData"
+        tools:context=".ui.dependency.DependencyListFragment">
+
+        <LinearLayout
+            android:id="@+id/llNoDataDependencyList"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.7">
-        </ImageView>
-        <TextView
-            android:id="@+id/tvDependencyListNoData"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivDependencyListNoData"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"></ImageView>
+
+            <TextView
+                android:id="@+id/tvDependencyListNoData"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:layout_gravity="center"
+                android:textStyle="bold"></TextView>
+        </LinearLayout>
+
+        <!-- ProgressDialog oculto que se mostrará en las consultas -->
+        <include
+            android:id="@+id/includePBDependencyList"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.3"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            ></TextView>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            layout="@layout/layout_progressbar"></include>
 
- <!-- ProgressDialog oculto que se mostrará en las consultas -->
-    <include
-        android:id="@+id/includePBDependencyList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/layout_progressbar"></include>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDependency"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDependency"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="@dimen/fab_elevation"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"
-        android:src="@android:drawable/ic_menu_add" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/fab_elevation"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_add" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

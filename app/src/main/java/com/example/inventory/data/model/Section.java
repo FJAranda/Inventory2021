@@ -1,9 +1,15 @@
 package com.example.inventory.data.model;
 
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 
@@ -42,6 +48,11 @@ public class Section implements Comparable, Serializable {
 
     @Ignore
     public Section() {
+    }
+
+    @BindingAdapter({"bind:imageurl", "bind:error"})
+    public static void loadImage(ImageView imageView, String imageUrl, Drawable error){
+        Picasso.get().load(imageUrl).error(error).into(imageView);
     }
 
     public int getId() {

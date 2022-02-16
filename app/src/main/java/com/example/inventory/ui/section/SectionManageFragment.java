@@ -119,7 +119,7 @@ public class SectionManageFragment extends Fragment implements SectionManageCont
         section.setDescripcion(binding.tiledtDescripcionSection.getText().toString());
         section.setDependencia(binding.spDependencias.getSelectedItem().toString());
         //TODO: SET IMAGE
-        //section.setImagen(binding.ivSection.getDrawable().toString());
+        section.setImagen(binding.ivSection.getDrawable().toString());
         return section;
     }
 

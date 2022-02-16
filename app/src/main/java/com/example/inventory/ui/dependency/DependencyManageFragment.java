@@ -8,10 +8,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDeepLinkBuilder;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +23,17 @@ import com.example.inventory.InventoryApplication;
 import com.example.inventory.R;
 import com.example.inventory.data.model.Dependency;
 import com.example.inventory.databinding.FragmentDependencyManageBinding;
+import com.example.inventory.utils.StateManage;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Random;
 
 public class DependencyManageFragment extends Fragment implements DependencyManageContract.View{
     FragmentDependencyManageBinding binding;
     DependencyManagePresenter presenter;
+    DependencyManageVM viewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +44,7 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentDependencyManageBinding.inflate(getLayoutInflater());
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dependency_manage, container, false);
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
@@ -47,15 +54,33 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
         super.onViewCreated(view, savedInstanceState);
         //Si recibe un bundle que no es nulo estamos en modo edicion
         if (DependencyManageFragmentArgs.fromBundle(getArguments()).getDependency() != null){
+            viewModel = new ViewModelProvider(this, new DependencyManageViewModelFactory(DependencyManageFragmentArgs.fromBundle(getArguments()).getDependency())).get(DependencyManageVM.class);
+            //binding.setDependency(DependencyManageFragmentArgs.fromBundle(getArguments()).getDependency());
             getActivity().setTitle(getString(R.string.strEditarDependencia));
-            setFabEditMode();
+            //setFabEditMode();
             initView(DependencyManageFragmentArgs.fromBundle(getArguments()).getDependency());
         }
         //Modo Añadir
         else{
+            viewModel = new ViewModelProvider(this, null).get(DependencyManageVM.class);
             getActivity().setTitle(getString(R.string.strAddDependencia));
-            setFabAddMode();
+            //setFabAddMode();
         }
+        viewModel.getState().observe(getViewLifecycleOwner(), object ->{
+            StateManage stateManage = ((StateManage)object);
+            switch (stateManage.getState()) {
+                case SUCCESSADD:
+                    onAddSuccess("ADD SUCCESS");
+                    break;
+                case SUCESSEDIT:
+                    onAddSuccess("EDIT SUCCESS");
+                    break;
+                case FAILURE:
+                    onAddFailure("ADD FAILURE");
+                    break;
+            }
+        });
+        binding.setViewmodel(viewModel);
     }
 
     private void setFabAddMode() {
@@ -115,6 +140,10 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
         notificationManager.notify(new Random().nextInt(1000), builder.build());
         NavHostFragment.findNavController(this).navigateUp();
 
+    }
+
+    public void fabClick(){
+        Log.d("FABCLICK", "dependency");
     }
 
     @Override

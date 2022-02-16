@@ -108,4 +108,11 @@ public class Dependency implements Comparable, Serializable {
     public String toString() {
         return nombreCorto;
     }
+
+    //Enumerado para elegir la opcion para ordenar dependencias
+    public enum Order{
+        SHORTNAME,
+        NAME,
+        ID
+    }
 }
